@@ -5,5 +5,4 @@ __pycache__/
 shop/fixtures/
 media/
 *.sqlite3
-runtime.txt
-Procfile
+
