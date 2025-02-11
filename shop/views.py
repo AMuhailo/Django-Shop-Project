@@ -1,6 +1,8 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.urls import reverse_lazy
+
+from cart.forms import QuantityForm
 from .forms import ProductCreateFormset
 from .models import Category, Product
 
@@ -55,3 +57,9 @@ class ProductDetailView(DetailView):
     template_name = "pages/detailitem.html"
     slug_url_kwarg = "product_slug"
     pk_url_kwarg = "product_id"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = QuantityForm()
+        return context
+    

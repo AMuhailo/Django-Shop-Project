@@ -18,6 +18,8 @@ import dj_database_url
 import cloudinary.api
 import cloudinary
 import cloudinary.uploader
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 env = environ.Env()
 environ.Env.read_env()
@@ -29,8 +31,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
+CART_SESSION_API = 'cart'
 # SECURITY WARNING: don't run with debug turned on in production!
 PRODUCTION_TEST = False
+
 if ENVIRONMENT  == 'production' or PRODUCTION_TEST == True:
     DEBUG = False
 else:
@@ -51,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary',
     'shop.apps.ShopConfig',
+    'cart.apps.CartConfig',
 ]
 
 MIDDLEWARE = [
