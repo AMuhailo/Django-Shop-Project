@@ -21,7 +21,7 @@ import cloudinary.uploader
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 env = environ.Env()
 environ.Env.read_env()
-ENVIROMENT = env('ENVIROMENT', default = 'production')
+ENVIRONMENT  = env('ENVIRONMENT ', default = 'production')
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
@@ -31,7 +31,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 PRODUCTION_TEST = False
-if ENVIROMENT == 'production' or PRODUCTION_TEST == True:
+if ENVIRONMENT  == 'production' or PRODUCTION_TEST == True:
     DEBUG = False
 else:
     DEBUG = True
@@ -93,7 +93,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-if ENVIROMENT == 'production' or PRODUCTION_TEST == True:
+if ENVIRONMENT  == 'production' or PRODUCTION_TEST == True:
     DATABASES['default'] = dj_database_url.parse(env('DATABASE_URL')) 
     
 # Password validation
@@ -134,13 +134,20 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-MEDIA_URL = 'media/'
-if ENVIROMENT == 'production' or PRODUCTION_TEST == True:
+CLOUDINARY_URL = env('CLOUDINARY_URL')
+cloudinary.config(
+    cloud_name = env('CLOUD_NAME'), 
+    api_key = env('CLOUD_API_KEY'), 
+    api_secret = env('CLOUD_API_SECRET'),
+    secure=True
+)
+
+if ENVIRONMENT  == 'production' or PRODUCTION_TEST == True:
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 else:
+    MEDIA_URL = 'media/'
     MEDIA_ROOT = BASE_DIR / 'media'
 
-CLOUDINARY_URL = env('CLOUDINARY_URL')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
