@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 import environ
+import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 env = environ.Env()
 environ.Env.read_env()
@@ -32,8 +33,8 @@ if ENVIROMENT == 'production' or PRODUCTION_TEST == True:
 else:
     DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'shopfurnitures.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://shopfurnitures.up.railway.app']
 
 # Application definition
 
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -87,7 +89,8 @@ DATABASES = {
     }
 }
 if ENVIROMENT == 'production' or PRODUCTION_TEST == True:
-    DATABASES['default'] = env('DATABASE_URL')    
+    DATABASES['default'] = dj_database_url.parse(env('DATABASE_URL')) 
+    
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
@@ -124,7 +127,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 # Default primary key field type

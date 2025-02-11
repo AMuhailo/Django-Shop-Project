@@ -1,0 +1,26 @@
+.card-items{
+    width: 18rem;
+}
+.card-img-items{
+    height: 15rem;
+}
+.card-text-items{
+    height: 10rem;
+}
+.card-price-items{
+    font-size: 20px;
+}
+
+.card-detail{
+    width: 25rem;
+}
+.card-img-detail{
+    height: auto;
+}
+.card-text-detail{
+    height: auto;
+}
+.card-price-detail{
+    font-size: 20px;
+}
+

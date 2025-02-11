@@ -2,5 +2,8 @@
 myshop/__pycache__/
 myshop/.env
 __pycache__/
+shop/fixtures/
 media/
 *.sqlite3
+runtime.txt
+Procfile
