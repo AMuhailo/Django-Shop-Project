@@ -1,0 +1,10 @@
+<ul class="nav flex-column nav-underline">
+    <li class="nav-item">
+        <a class="nav-link text-secondary fw-bold {% if not category %}active{% endif %}" aria-current="page" href="{% url 'shop:product_list_url'%}">All</a>
+    </li>
+    {% for categorie in categories %}
+        <li class="nav-item">
+            <a class="nav-link text-dark {% if category.title == categorie.title %}active{% endif  %}" href="{% url 'shop:category_product_list_url' categorie.slug categorie.id%}">{{ categorie.title }}</a>
+        </li>
+    {% endfor %}
+</ul>

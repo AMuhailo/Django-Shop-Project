@@ -1,4 +1,5 @@
 .venv
-myshop/__pycache__
+myshop/__pycache__/
+shop/__pycache__/
 myshop/.env
 *.sqlite3

@@ -1,0 +1,15 @@
+<div class="row row-cols-2 row-cols-lg-4 gap-2 gap-lg-3">
+    {% for product in products %}
+    <div class="col">
+        <div class="card card-items">
+            <img src="{{ product.image.url }}" class="card-img-top card-img-items" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.title }}</h5>
+                <p class="card-text card-text-items">{{ product.description|truncatewords:20}}</p>
+                <p class="card-text card-price-items">Price ${{ product.price }}</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
