@@ -35,10 +35,10 @@ CART_SESSION_API = 'cart'
 # SECURITY WARNING: don't run with debug turned on in production!
 PRODUCTION_TEST = False
 
-if ENVIRONMENT  == 'production' or PRODUCTION_TEST == True:
-    DEBUG = False
-else:
-    DEBUG = True
+# if ENVIRONMENT  == 'production' or PRODUCTION_TEST == True:
+#     DEBUG = False
+# else:
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'shopfurnitures.up.railway.app']
 CSRF_TRUSTED_ORIGINS = ['https://shopfurnitures.up.railway.app']
@@ -146,12 +146,12 @@ cloudinary.config(
     api_secret = env('CLOUD_API_SECRET'),
     secure=True
 )
-
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 if ENVIRONMENT  == 'production' or PRODUCTION_TEST == True:
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-else:
-    MEDIA_URL = 'media/'
-    MEDIA_ROOT = BASE_DIR / 'media'
+    
+    
 
 
 # Default primary key field type
