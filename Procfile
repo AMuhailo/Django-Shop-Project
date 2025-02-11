@@ -1,1 +1,1 @@
-web: qunicorn myshop.wsgi:application
+web: gunicorn myshop.wsgi:application
