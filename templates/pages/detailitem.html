@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} {{ product.title }}{% endblock title %}
+
+{% block content %}
+<div class="card card-detail mx-3 my-5">
+    <img src="{{ product.image.url }}" class="card-img-top card-img-detail" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">{{ product.title }}</h5>
+        <p class="card-text card-text-detail">{{ product.description}}</p>
+        <p class="card-text card-price-detail">Price ${{ product.price }}</p>
+        <a href="{% url 'shop:product_update_url' product.id %}" class="btn btn-primary">Update</a>
+    </div>
+</div>
+{% endblock content %}

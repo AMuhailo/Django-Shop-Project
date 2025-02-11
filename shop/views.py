@@ -1,5 +1,7 @@
-from django.shortcuts import get_object_or_404, render
-from django.views.generic import ListView, DetailView
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.urls import reverse_lazy
+from .forms import ProductCreateFormset
 from .models import Category, Product
 
 # Create your views here.
@@ -28,5 +30,28 @@ class ProductListView(ListView):
         context["categories"] = Category.objects.all()
         context["category"] = self.category
         return context
+
+
+class ProductCreateView(CreateView):
+    model = Product
+    form_class = ProductCreateFormset
+    template_name = 'pages/forms/createproduct.html'
+    success_url = reverse_lazy('shop:product_list_url')
     
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    form_class = ProductCreateFormset
+    template_name = "pages/forms/createproduct.html"
+    success_url = reverse_lazy('shop:product_list_url')
     
+    def get_object(self, queryset = ...):
+        return get_object_or_404(Product, id = self.kwargs.get('product_id'))
+    
+
+class ProductDetailView(DetailView):
+    model = Product
+    context_object_name = 'product'
+    template_name = "pages/detailitem.html"
+    slug_url_kwarg = "product_slug"
+    pk_url_kwarg = "product_id"
