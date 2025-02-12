@@ -49,6 +49,6 @@
 </table>
 <div class='d-flex justify-content-between mx-5'>
     <a href="{% url 'shop:product_list_url'%}" class="btn btn-sm btn-outline-secondary px-5">Continues Shopping</a>
-    <a href="/" class="btn btn-sm btn-success px-5">Checkout</a>
+    <a href="{% url 'order:create_order_url'%}" class="btn btn-sm btn-success px-5">Checkout</a>
 </div>
 {% endblock content %}

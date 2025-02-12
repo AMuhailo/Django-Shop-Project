@@ -1,0 +1,5 @@
+<form action="{% url 'order:create_order_url'%}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type='submit' class='btn btn-sm btn-outline-secondary w-100'>Place order</button>
+</form>
