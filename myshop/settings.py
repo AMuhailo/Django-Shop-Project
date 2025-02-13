@@ -152,9 +152,10 @@ MEDIA_ROOT = BASE_DIR / 'media'
 if ENVIRONMENT  == 'production' or PRODUCTION_TEST == True:
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
     
-    
-
-
+if ENVIRONMENT  == 'production' or PRODUCTION_TEST == True:    
+    REDIS_URL = env("REDIS_PUBLIC_URL")
+else:
+    REDIS_URL = env("REDIS_URL")
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
