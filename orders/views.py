@@ -18,7 +18,7 @@ def create_order(request):
                                      quantity = item['quantity'],
                                      price = item['price'])
             cart.clear()
-            send_order.delay_on_commit(order.id)
+            send_order.delay(order.id)
             return redirect('shop:product_list_url')
     else:
         form = OrderForm()
