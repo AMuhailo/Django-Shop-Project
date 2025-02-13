@@ -1,9 +1,6 @@
-.venv
+ll_env
 *__pycache__/
 myshop/.env
 */fixtures/
 media/
 *.sqlite3
-
-shop/__pycache__/views.cpython-312.pyc
-shop/__pycache__/urls.cpython-312.pyc
