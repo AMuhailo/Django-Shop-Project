@@ -159,4 +159,25 @@ else:
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
+#EMAIL SETTINGS
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+#CELERY SETTINGS
+CELERY_TIMEZONE = "UTC"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+if ENVIRONMENT  == 'production' or PRODUCTION_TEST == True:
+    CELERY_BROKER_URL = env("REDIS_PUBLIC_URL")
+else:
+    CELERY_BROKER_URL = env("REDIS_URL")
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+
+
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
