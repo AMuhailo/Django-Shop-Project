@@ -3,15 +3,38 @@
 {% block title %} {{ product.title }}{% endblock title %}
 
 {% block content %}
-<div class="card card-detail mx-3 my-5">
-    <img src="{{ product.image.url }}" class="card-img-top card-img-detail" alt="...">
-    <div class="card-body">
-        <h5 class="card-title">{{ product.title }}</h5>
-        <p class="card-text card-text-detail">{{ product.description}}</p>
-        {% include "pages/forms/quantity.html" with form=form%}
-        <p class="card-text card-price-detail">Price ${{ product.price }}</p>
-        <a href="{% url 'shop:product_update_url' product.id %}" class="btn btn-primary">Update</a>
-        <a href="{% url 'cart:cart_add' product.id %}" class="btn btn-success">Buy</a>
+<div class="row gap-5 mx-2 my-5">
+    <div class="col-2 col-md-1">
+        <!-- Categories code -->
+        <h4>Categories code</h4>
+    </div>
+    <div class="col-sm-5 col-md-7 ">
+        <div class="card mb-3 card-detail border-0">
+            <div class="row g-0">
+                <div class="col">
+                    <img src="{{ product.image.url}}" class="card-img-detail img-fluid rounded-start " alt="...">
+                </div>
+                <div class="col-md-8 ">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.title}}</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">{{ product.category}}</h6>
+                        <p class="card-text card-text-detail">{{ product.description}}</p>
+                        <div class='d-flex gap-5 justify-content-between flex-row-reverse'>
+                            {% include "pages/forms/quantity.html" with form=form product=product %}
+                            <p class="card-text card-price-detail">Price ${{ product.price }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-5 col-md-3">
+        <h4 class='mx-3'>{% if category %}{{category.title }}{% else %}All{% endif %} Products</h4>
+        <a href="{% url 'shop:product_create_url'%}" class="btn btn-sm btn-primary">Add Product</a>
+        <div class="container-fluid w-100">
+        <!-- Products code -->
+            {% include "pages/include/products.html" with products=products%}
+        </div>
     </div>
 </div>
 {% endblock content %}

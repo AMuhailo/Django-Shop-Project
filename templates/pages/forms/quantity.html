@@ -1,5 +1,5 @@
-<form method='POST'>
+<form action="{% url 'cart:cart_add' product.id %}" class='d-flex gap-2 align-items-center' method='POST'>
     {% csrf_token %}
     {{ form.as_p }}
-    <button type='submit' class='btn btn-sm btn-success'>Add</button>
+    <button type='submit' class='btn btn-sm btn-success mb-3 px-5'>Add</button>
 </form>

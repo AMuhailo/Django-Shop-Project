@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Order {% endblock title %}
+
+{% block content %}
+
+<div class="container-lg mx-auto my-5">
+    <div class="row gap-4">
+        <div class="col-5">
+            <div class="card mx-auto w-75 bg-light">
+                <div class="card-body">
+                    <h4 class="border-bottom py-2">Checkout</h4>
+                    {% include "pages/forms/orders.html" with form=form %}
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card card-order border-0 border-bottom border-secondary border-4">
+                <div class="card-body">
+                    <h5 class="card-title">Your orders:</h5>
+                    <p class="card-text">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span class='w-25 fw-bold   '>Product</span>
+                                <span class="fw-bold">Quantity</span>
+                                <span class="fw-bold">Price</span>
+                            </li>
+                            {% for item in cart %}
+                                <li class="list-group-item border-0 d-flex justify-content-between">
+                                    <span class='w-25'>{{ item.product }}</span>
+                                    <span >x{{ item.quantity }}</span>
+                                    <span class="fw-semibold">${{ item.total_price}}</span>
+                                </li>
+                            {% endfor %}
+                            <li class="list-group-item d-flex justify-content-between mt-3">
+                                <span class='w-75 fw-bold'>Total</span>
+                                <span class="fw-bold">${{ cart.get_total_price }}</span>
+                            </li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
