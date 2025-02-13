@@ -1,4 +1,4 @@
-.venv
+ll_env/
 myshop/__pycache__/
 myshop/.env
 __pycache__/
