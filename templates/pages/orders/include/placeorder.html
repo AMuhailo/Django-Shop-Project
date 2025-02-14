@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %} Place order {% endblock title %}
+
+{% block content %}
+<table class="table mx-5 table-borderless">
+    <thead>
+        <tr>
+            <th scope="col" style='width:200px;'>Image</th>
+            <th scope="col">Product</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Unit Price</th>
+            <th scope="col">Price</th>
+        </tr>
+    </thead>
+    <tbody class='align-content-center'>
+        {% with items=order.items_order.all %}
+        {% for item in items %}
+        <tr>
+            <th scope="row">
+                <img src="{{ item.product.image.url }}" class="img-thumbnail" alt="...">
+            </th>
+            <td>{{ item.product.title }}</td>
+            <td>
+                {{ item.quantity }}
+            </td>
+            <td>{{ item.price }}</td>
+            <td>${{ item.get_money }}</td>
+        </tr>
+        {% endfor %}    
+        <tr>
+            <td class="table-dark" colspan="5">Total</td>
+            <td class="table-dark">${{ order.get_total_money}}</td>
+        </tr>
+        {% endwith %}
+    </tbody>
+</table>
+<div class='d-flex justify-content-between mx-5'>
+    <a href="{% url 'shop:product_list_url'%}" class="btn btn-sm btn-outline-secondary px-5">Continues Shopping</a>
+    <form action="{% url 'payment:payment_process_url'%}" method='POST'>
+        {% csrf_token %}
+        <button type='submit' class="btn btn-sm btn-success px-5">Checkout</button>
+    </form>
+</div>
+{% endblock content %}

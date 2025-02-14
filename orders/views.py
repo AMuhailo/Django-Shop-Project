@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from django.urls import reverse
 from django.views.decorators.http import require_POST
 from cart.cart import Cart
 from .models import Order, Items
@@ -17,7 +18,8 @@ def create_order(request):
                                      quantity = item['quantity'],
                                      price = item['price'])
             cart.clear()
-            return redirect('shop:product_list_url')
+            request.session['order_id'] = order.id
+            return redirect(reverse('payment:payment_process_url'))
     else:
         form = OrderForm()
     context = {
