@@ -1,32 +1,17 @@
 {% extends "base.html" %}
 {% load static %}
+{% load tags %}
 {% block title %} {{ product.title }}{% endblock title %}
 
 {% block content %}
 <div class="row gap-5 mx-2 my-5">
     <div class="col-2 col-md-1">
         <!-- Categories code -->
-        <h4>Categories code</h4>
+        {% categories_list product.category.slug product.category.id %}
     </div>
     <div class="col-sm-5 col-md-7 ">
-        <div class="card mb-3 card-detail border-0">
-            <div class="row g-0">
-                <div class="col">
-                    <img src="{{ product.image.url}}" class="card-img-detail img-fluid rounded-start " alt="...">
-                </div>
-                <div class="col-md-8 ">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ product.title}}</h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">{{ product.category}}</h6>
-                        <p class="card-text card-text-detail">{{ product.description}}</p>
-                        <div class='d-flex gap-5 justify-content-between flex-row-reverse'>
-                            {% include "pages/forms/quantity.html" with form=form product=product %}
-                            <p class="card-text card-price-detail">Price ${{ product.price }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- Detail code -->
+        {% include "pages/include/details.html" with product=product%}
     </div>
     <div class="col-sm-5 col-md-3">
         <h4 class='mx-3'>{% if category %}{{category.title }}{% else %}All{% endif %} Products</h4>

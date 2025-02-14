@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 ll_env
 *__pycache__/
-=======
-ll_env/
-myshop/__pycache__/
->>>>>>> orders
 myshop/.env
 */fixtures/
 media/

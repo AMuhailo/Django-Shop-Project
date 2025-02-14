@@ -15,10 +15,6 @@ import os
 from pathlib import Path
 import environ
 import dj_database_url
-import cloudinary.api
-import cloudinary
-import cloudinary.uploader
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 env = environ.Env()
@@ -33,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('SECRET_KEY')
 CART_SESSION_API = 'cart'
 # SECURITY WARNING: don't run with debug turned on in production!
-PRODUCTION_TEST = False
+PRODUCTION_TEST = True
 
 if ENVIRONMENT  == 'production' or PRODUCTION_TEST == True:
     DEBUG = False
@@ -53,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'cloudinary_storage',
     'django.contrib.staticfiles',
+    'django.contrib.postgres',
     'cloudinary',
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
@@ -83,6 +80,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processor.cart',
             ],
         },
     },
@@ -141,16 +139,11 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 CLOUDINARY_URL = env('CLOUDINARY_URL')
-cloudinary.config(
-    cloud_name = env('CLOUD_NAME'), 
-    api_key = env('CLOUD_API_KEY'), 
-    api_secret = env('CLOUD_API_SECRET'),
-    secure=True
-)
+
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 if ENVIRONMENT  == 'production' or PRODUCTION_TEST == True:
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'    
     
 if ENVIRONMENT  == 'production' or PRODUCTION_TEST == True:    
     REDIS_URL = env("REDIS_PUBLIC_URL")

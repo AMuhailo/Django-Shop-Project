@@ -37,7 +37,20 @@
                     </ul>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                    <a class="nav-link position-relative">
+                      {% with items=cart|length%}
+                      <i class="bi bi-bag-heart"></i>
+                      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">
+                        {% if items > 0 %}
+                          {{items}}
+                        {% elif items > 100 %}
+                          99+
+                        {% else %}
+                          <span class="visually-hidden">unread messages</span>
+                        {% endif %}
+                      </span>
+                      {% endwith %}
+                    </a>
                   </li>
                 </ul>
                 <form class="d-flex" role="search">

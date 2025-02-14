@@ -1,0 +1,18 @@
+<div class="card mb-3 card-detail border-0">
+    <div class="row g-0">
+        <div class="col">
+            <img src="{{ product.image.url}}" class="card-img-detail img-fluid rounded-start " alt="...">
+        </div>
+        <div class="col-md-8 ">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.title}}</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">{{ product.category}}</h6>
+                <p class="card-text card-text-detail">{{ product.description}}</p>
+                <div class='d-flex gap-5 justify-content-between flex-row-reverse'>
+                    {% include "pages/forms/quantity.html" with form=form product=product %}
+                    <p class="card-text card-price-detail">Price ${{ product.price }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
