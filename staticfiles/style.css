@@ -12,10 +12,14 @@
 }
 
 .card-detail{
-    width: 25rem;
+    width: 100%;
+}
+
+.cart-title-detail{
+    font-size: 28px;
 }
 .card-img-detail{
-    height: auto;
+    height: 25%;
 }
 .card-text-detail{
     height: auto;
@@ -24,3 +28,6 @@
     font-size: 20px;
 }
 
+.card-order{
+    background-color: aqua;
+}

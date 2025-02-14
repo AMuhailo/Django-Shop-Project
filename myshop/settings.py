@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('SECRET_KEY')
 CART_SESSION_API = 'cart'
 # SECURITY WARNING: don't run with debug turned on in production!
-PRODUCTION_TEST = True
+PRODUCTION_TEST = False
 
 if ENVIRONMENT  == 'production' or PRODUCTION_TEST == True:
     DEBUG = False
@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
+    'payment.apps.PaymentConfig',
 ]
 
 MIDDLEWARE = [
@@ -137,6 +138,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 CLOUDINARY_URL = env('CLOUDINARY_URL')
 
@@ -170,6 +172,11 @@ if ENVIRONMENT  == 'production' or PRODUCTION_TEST == True:
 else:
     CELERY_BROKER_URL = env("REDIS_URL")
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True"""
+
+#STRIPE SETTINGS
+STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY_TEST',default='secret_key')
+STRIPE_VERSION = '2022-08-01'
+STRIPE_WEBHOOK_SECRET = env('STRIPE_WEBHOOK_SECRET')
 
 
 
