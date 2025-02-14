@@ -1,7 +1,10 @@
 from decimal import Decimal
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
+from django.http import HttpResponse
 from django.conf import settings
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
 import stripe
 from cart.cart import Cart
 from orders.models import Order,Items
@@ -45,3 +48,31 @@ def success(request):
 
 def cancel(request):
     return render(request, 'pages/orders/include/cancel_url.html')
+
+
+@require_POST
+@csrf_exempt
+def stripe_webhook(request):
+    endpoint_secret = settings.STRIPE_WEBHOOK_SECRET
+    payload = request.body
+    signature_header = request.META['HTTP_STRIPE_SIGNATURE']
+    event = None
+    
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, signature_header, endpoint_secret
+        )
+    except:
+        return HttpResponse(status = 400)
+    
+    if event['type'] == 'checkout.session.completed':
+        session = event['data']['object']
+        checkout_session_id = session.client_reference_id
+        try:
+            order = get_object_or_404(Order, id = checkout_session_id)
+        except Order.DoesNotExist:
+            return HttpResponse(status=404)
+        order.paid = True
+        order.save()
+    
+    return HttpResponse(status=200)

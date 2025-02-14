@@ -31,10 +31,10 @@ CART_SESSION_API = 'cart'
 # SECURITY WARNING: don't run with debug turned on in production!
 PRODUCTION_TEST = False
 
-if ENVIRONMENT  == 'production' or PRODUCTION_TEST == True:
-    DEBUG = False
-else:
-    DEBUG = True
+# if ENVIRONMENT  == 'production' or PRODUCTION_TEST == True:
+#     DEBUG = False
+# else:
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'shopfurnitures.up.railway.app']
 CSRF_TRUSTED_ORIGINS = ['https://shopfurnitures.up.railway.app']
@@ -175,5 +175,8 @@ CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True"""
 #STRIPE SETTINGS
 STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY_TEST',default='secret_key')
 STRIPE_VERSION = '2022-08-01'
+STRIPE_WEBHOOK_SECRET = env('STRIPE_WEBHOOK_SECRET')
+
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
