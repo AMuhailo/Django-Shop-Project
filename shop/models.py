@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import User
-
+from django.core.validators import MinValueValidator, MaxValueValidator
 # Create your models here.
 
 class Category(models.Model):
@@ -24,6 +24,8 @@ class Category(models.Model):
         return self.title
     
 class Product(models.Model):
+    
+    #Product info
     category = models.ForeignKey(Category, on_delete = models.CASCADE, related_name = 'category_product')
     image = models.ImageField(upload_to = 'product/',blank = True)
     title = models.CharField(max_length = 255)
@@ -32,6 +34,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits = 10, decimal_places = 2)
     active = models.BooleanField(default = True)
     
+    #Created product
     created = models.DateTimeField(auto_now_add = True)
     updated = models.DateTimeField(auto_now = True)
     

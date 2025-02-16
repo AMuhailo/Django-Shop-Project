@@ -4,12 +4,17 @@ from shop.models import Product
 
 # Create your models here.
 class Order(models.Model):
+    #Info person
     first_name = models.CharField(max_length = 255)
     last_name = models.CharField(max_length = 255)
     email = models.EmailField()
+    
+    #Location
     adress = models.CharField(max_length = 100)
     city = models.CharField(max_length = 255)
     postal_code= models.CharField(max_length = 20)
+    
+    #Created orders
     created = models.DateTimeField(auto_now_add = True)
     updated = models.DateTimeField(auto_now = True)
     paid = models.BooleanField(default = False)
