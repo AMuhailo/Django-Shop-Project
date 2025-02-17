@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views.decorators.http import require_POST
 from cart.cart import Cart
+from .tasks import send_order
 from .models import Order, Items
 from .forms import OrderForm
 
@@ -22,6 +23,7 @@ def create_order(request):
                                      quantity = item['quantity'],
                                      price = item['price'])
             cart.clear()
+            send_order.delay(order.id)
             request.session['order_id'] = order.id
             return redirect(reverse('payment:payment_process_url'))
     else:
