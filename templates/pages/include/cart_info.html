@@ -51,9 +51,23 @@
         </tr>
             {% endwith %}
         {% endfor %}
+        {% if cart.coupon %}
         <tr>
-            <td class="table-dark" colspan="5">Total</td>
-            <td class="table-dark">${{ cart.get_total_price}}</td>
+            <td class="table-light">{{ cart.coupon.code}} coupon</td>
+            <td class="table-light text-danger" colspan='4'>-{{cart.coupon.discount}}%</td>
+            <td class="table-light" colspan='4'>$-{{cart.get_coupon_discount|floatformat:2}}</td>
+        </tr>
+        {% endif %}
+        <tr>
+            <td class="table-dark">Total</td>
+            <td class="table-dark" colspan="4">
+                <form action="{% url 'coupon:coupons_url' %}" method="POST" class='d-flex  justify-content-start align-items-center'>
+                    {% csrf_token %}
+                    {{ coupon_form.as_p}}
+                    <button class='btn btn-sm btn-primary mb-3'>Apply</button>
+                </form>
+            </td>
+            <td class="table-dark">${{ cart.get_coupon_discount_total_price|floatformat:2}}</td>
         </tr>
     </tbody>
 </table>

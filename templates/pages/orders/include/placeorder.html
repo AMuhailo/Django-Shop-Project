@@ -22,15 +22,22 @@
             </th>
             <td>{{ item.product.title }}</td>
             <td>
-                {{ item.quantity }}
+                x{{ item.quantity }}
             </td>
-            <td>{{ item.price }}</td>
+            <td>${{ item.price }}</td>
             <td>${{ item.get_money }}</td>
         </tr>
         {% endfor %}    
+        {% if order.coupon %}
+        <tr>
+            <td class="table-light">{{ order.coupon.code}} coupon</td>
+            <td class="table-light text-danger" colspan='4'>-{{order.coupon.discount}}%</td>
+            <td class="table-light" colspan='4'>$-{{order.get_discount|floatformat:2}}</td>
+        </tr>
+        {% endif %}
         <tr>
             <td class="table-dark" colspan="5">Total</td>
-            <td class="table-dark">${{ order.get_total_money}}</td>
+            <td class="table-dark">${{ order.get_total_money|floatformat:2}}</td>
         </tr>
         {% endwith %}
     </tbody>
