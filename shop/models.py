@@ -4,6 +4,8 @@ from django.utils.text import slugify
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils import timezone
+from django.conf import settings
+from cloudinary.models import CloudinaryField
 # Create your models here.
 
 class Category(models.Model):
@@ -29,7 +31,10 @@ class Product(models.Model):
     
     #Product info
     category = models.ForeignKey(Category, on_delete = models.CASCADE, related_name = 'category_product')
-    image = models.ImageField(upload_to = 'product/',blank = True)
+    if settings.ENVIRONMENT  == 'production' or settings.PRODUCTION_TEST == True:
+        image = CloudinaryField('product', blank = True)
+    else:
+        image = models.ImageField(upload_to = 'product/',blank = True)
     title = models.CharField(max_length = 255)
     slug = models.SlugField(max_length = 255, blank = True)
     description = models.TextField()
@@ -45,11 +50,13 @@ class Product(models.Model):
         indexes = [models.Index(fields = ['id', 'slug']),
                     models.Index(fields = ['title']),
                     models.Index(fields = ['-created'])]
-        
+    
+    
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(f"{self.category}-{self.title}-product")
         return super().save(*args, **kwargs)
+    
     
     def total_price(self):
         try:
@@ -58,6 +65,8 @@ class Product(models.Model):
             return self.price
         except Allowance.DoesNotExist:
             return self.price 
+        
+    
     def discount_price(self):
         try:
             allowance = self.product_allowance.get(from_date__lte=timezone.now(),
@@ -68,6 +77,8 @@ class Product(models.Model):
             return self.price
         except Allowance.DoesNotExist:
             return self.price 
+        
+        
     def __str__(self):
         return self.title
     
