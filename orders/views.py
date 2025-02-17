@@ -23,7 +23,7 @@ def create_order(request):
                                      quantity = item['quantity'],
                                      price = item['price'])
             cart.clear()
-            send_order.delay(order.id)
+            send_order.apply_async(args=[order.id], countdown=5)
             request.session['order_id'] = order.id
             return redirect(reverse('payment:payment_process_url'))
     else:
