@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
-
+from coupons.forms import CouponForm
 from shop.models import Product
 from .cart import Cart
 from .forms import QuantityForm
@@ -27,10 +27,12 @@ def cart_remove(request, product_id):
 
 def carts(request):
     cart = Cart(request)
+    coupon_form = CouponForm()
     for item in cart:
         item['item_override'] = QuantityForm(initial={'quantity':item['quantity'],
                                                       'override':True})
     context = {
-        'cart':cart
+        'cart':cart,
+        'coupon_form':coupon_form
     }
     return render(request, 'pages/include/cart_info.html', context)

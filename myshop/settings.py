@@ -31,10 +31,10 @@ CART_SESSION_API = 'cart'
 # SECURITY WARNING: don't run with debug turned on in production!
 PRODUCTION_TEST = False
 
-if ENVIRONMENT  == 'production' or PRODUCTION_TEST == True:
-    DEBUG = False
-else:
-    DEBUG = True
+# if ENVIRONMENT  == 'production' or PRODUCTION_TEST == True:
+#     DEBUG = False
+# else:
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'shopfurnitures.up.railway.app']
 CSRF_TRUSTED_ORIGINS = ['https://shopfurnitures.up.railway.app']
@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
     'payment.apps.PaymentConfig',
+    'coupons.apps.CouponsConfig',
 ]
 
 MIDDLEWARE = [
