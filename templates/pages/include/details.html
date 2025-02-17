@@ -10,7 +10,16 @@
                 <p class="card-text card-text-detail">{{ product.description}}</p>
                 <div class='d-flex gap-5 justify-content-between flex-row-reverse'>
                     {% include "pages/forms/quantity.html" with form=form product=product %}
-                    <p class="card-text card-price-detail">Price ${{ product.price }}</p>
+                    {% if product.total_price < product.price %}
+                        {% with discount=product.product_allowance.all%}
+                            {% for discount in discount %}
+                            <p class="card-text card-price-items d-flex justify-content-between"><span class='discount text-success'>Price ${{ product.total_price }}</span><span class='text-danger'>-{{discount.discount}}%</span></p>
+                            {% endfor %}
+                        {% endwith %}
+                            
+                    {% else %}
+                        <p class="card-text card-price-items">Price ${{ product.price }}</p>
+                    {% endif %}
                 </div>
             </div>
         </div>

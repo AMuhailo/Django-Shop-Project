@@ -1,3 +1,4 @@
+{% load static %}
 <div class="row row-cols-2 row-cols-lg-5 gap-2 gap-lg-3">
     {% for product in products %}
     <div class="col">
@@ -6,7 +7,17 @@
                 <img src="{{ product.image.url }}" class="card-img-top card-img-items" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{ product.title }}</h5>
-                    <p class="card-text card-price-items">Price ${{ product.price }}</p>
+                    
+                    {% if product.total_price < product.price %}
+                        {% with discount=product.product_allowance.all%}
+                            {% for discount in discount %}
+                            <p class="card-text card-price-items d-flex justify-content-between"><span class='discount text-success'>Price ${{ product.total_price }}</span><span class='text-danger'>-{{discount.discount}}%</span></p>
+                            {% endfor %}
+                        {% endwith %}
+                            
+                    {% else %}
+                        <p class="card-text card-price-items">Price ${{ product.price }}</p>
+                    {% endif %}
                 </div>
             </div>
         </a>
