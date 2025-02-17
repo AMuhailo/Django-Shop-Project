@@ -31,3 +31,17 @@
 .card-order{
     background-color: aqua;
 }
+
+.discount{
+    position: relative;
+}
+
+.discount::after{
+    content:"";
+    position: absolute;
+    top:50%;
+    width: 100%;
+    height: 2px;
+    color:red;
+    rotate: 12deg;
+}
