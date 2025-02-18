@@ -1,9 +1,10 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.urls import reverse_lazy
-from django.utils import timezone
+from django.contrib.postgres.search import SearchVector
+from django.db.models import Count
 from cart.forms import QuantityForm
-from .forms import ProductCreateFormset
+from .forms import ProductCreateFormset, SearchForm
 from .models import Category, Product
 
 # Create your views here.
@@ -27,6 +28,11 @@ class ProductListView(ListView):
             self.category = None
         return products
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["search_form"] = SearchForm() 
+        return context
+    
 
 
 class ProductCreateView(CreateView):
@@ -55,6 +61,26 @@ class ProductDetailView(DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        product = get_object_or_404(self.model, slug = self.kwargs.get('product_slug'),
+                                    id = self.kwargs.get('product_id'))
+        product_ids = product.category
+        similar_product = self.model.objects.filter(category_id__in= [product_ids]).exclude(id = product.id)[:4]
+        context['similar_product'] = similar_product
         context["form"] = QuantityForm()
         return context
-    
+
+def search(request):
+    query = None
+    search_form = SearchForm()
+    results = []
+    if 'query' in request.GET:
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            results = Product.objects.filter(active=True).annotate(search = SearchVector('title','description')).filter(search=query)
+    context ={
+        'query':query,
+        'results':results,
+        'search_form':search_form
+    }
+    return render(request,'pages/searchpage.html', context)

@@ -14,11 +14,32 @@
         {% include "pages/include/details.html" with product=product%}
     </div>
     <div class="col-sm-5 col-md-3">
-        <h4 class='mx-3'>{% if category %}{{category.title }}{% else %}All{% endif %} Products</h4>
-        <a href="{% url 'shop:product_create_url'%}" class="btn btn-sm btn-primary">Add Product</a>
-        <div class="container-fluid w-100">
-        <!-- Products code -->
-            {% include "pages/include/products.html" with products=products%}
+        <div class="row">
+            {% for similar in similar_product %}
+                <div class="col-sm-6 mb-3 mb-sm-2">
+                    <a href="{% url 'shop:product_detail_url' similar.slug similar.id%}" class="text-decoration-none text-dark">
+                        <div class="card">
+                            <img src="{{ similar.image.url }}" class="card-img-top card-img-items" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ similar.title }}</h5>
+                                <h5 class='card-subtitle text-secondary'>
+                                    {% if similar.total_price < similar.price %}
+                                        {% with discount=similar.product_allowance.all%}
+                                            {% for discount in discount %}
+                                            <p class="card-text card-price-items d-flex justify-content-between"><span class='discount text-success'>Price ${{ similar.total_price }}</span><span class='text-danger'>-{{discount.discount}}%</span></p>
+                                            {% endfor %}
+                                        {% endwith %}
+                                            
+                                    {% else %}
+                                        <p class="card-text card-price-items">Price ${{ similar.price }}</p>
+                                    {% endif %}
+                                </h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+
         </div>
     </div>
 </div>
