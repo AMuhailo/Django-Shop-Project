@@ -56,7 +56,6 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
     'payment.apps.PaymentConfig',
     'coupons.apps.CouponsConfig',
-    'django_celery_results',
     'django_celery_beat',
 ]
 
@@ -175,8 +174,7 @@ if ENVIRONMENT  == 'production' or PRODUCTION_TEST == True:
 else:
     CELERY_BROKER_URL = env("REDIS_URL")
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
-CELERY_RESULT_BACKEND = 'django-db'
-CELERY_RESULT_EXTENDED = True
+
 #STRIPE SETTINGS
 STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY_TEST',default='secret_key')
 STRIPE_VERSION = '2022-08-01'
