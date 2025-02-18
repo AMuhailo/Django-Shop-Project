@@ -18,14 +18,17 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
+from shop.views import ProductListView
 
 urlpatterns = [
+    path('', ProductListView.as_view(), name = 'product_list_url'),
     path('admin/', admin.site.urls),
     path('payment/',include('payment.urls', namespace= 'payment')),
     path('cart/',include('cart.urls', namespace='cart')),
     path('order/',include('orders.urls', namespace = 'order')),
     path('coupon/',include('coupons.urls')),
-    path('shop/',include('shop.urls'))
+    path('shop/',include('shop.urls')),
+    path('__debug__/',include('debug_toolbar.urls'))
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

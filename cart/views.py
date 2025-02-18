@@ -9,7 +9,8 @@ from .forms import QuantityForm
 @require_POST
 def cart_add(request, product_id):
     cart = Cart(request)
-    product = get_object_or_404(Product,
+    product = Product.objects.select_related('category')
+    product = get_object_or_404(product,
                                 id = product_id)
     form = QuantityForm(request.POST)
     if form.is_valid():
@@ -20,7 +21,8 @@ def cart_add(request, product_id):
 @require_POST
 def cart_remove(request, product_id):
     cart = Cart(request)
-    product = get_object_or_404(Product,
+    product = Product.objects.select_related('category')
+    product = get_object_or_404(product,
                                 id = product_id)
     cart.remove(product)
     return redirect('cart:carts_url')

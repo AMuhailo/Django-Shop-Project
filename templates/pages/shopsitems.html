@@ -6,12 +6,15 @@
 {% block content %}
 <div class="row gap-5 mx-2 my-5">
     <div class="col-6 col-md-1">
+        <form action="{% url 'shop:search_url'%}">
+            {% for field in search_form %}
+                {{ field }}
+            {% endfor %}
+            <button class='btn btn-sm btn-primary my-1'>Search</button>
+        </form>
         <!-- Categories code -->
         {% categories_list category.slug category.id %}
-        <form action="{% url 'shop:search_url'%}">
-            {{search_form.as_p}}
-            <button class='btn btn-sm btn-primary'>Search</button>
-        </form>
+        
     </div>
     <div class="col-sm-6 col-md-10">
         <h4 class='mx-3'>{% if category %}{{category.title }}{% else %}All{% endif %} Products</h4>

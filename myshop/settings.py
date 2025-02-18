@@ -31,10 +31,10 @@ CART_SESSION_API = 'cart'
 # SECURITY WARNING: don't run with debug turned on in production!
 PRODUCTION_TEST = False
 
-# if ENVIRONMENT  == 'production' or PRODUCTION_TEST == True:
-#     DEBUG = False
-# else:
-DEBUG = True
+if ENVIRONMENT  == 'production' or PRODUCTION_TEST == True:
+    DEBUG = False
+else:
+    DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'shopfurnitures.up.railway.app']
 CSRF_TRUSTED_ORIGINS = ['https://shopfurnitures.up.railway.app']
@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'payment.apps.PaymentConfig',
     'coupons.apps.CouponsConfig',
     'django_celery_beat',
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
@@ -68,10 +69,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'myshop.urls'
-
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

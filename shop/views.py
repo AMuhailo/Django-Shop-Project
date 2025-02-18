@@ -3,9 +3,10 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.urls import reverse_lazy
 from django.contrib.postgres.search import SearchVector
 from django.db.models import Count
+from django.utils import timezone
 from cart.forms import QuantityForm
 from .forms import ProductCreateFormset, SearchForm
-from .models import Category, Product
+from .models import Category, Product, Allowance
 
 # Create your views here.
 
@@ -16,14 +17,15 @@ class ProductListView(ListView):
     template_name = 'pages/shopsitems.html'
     
     def get_queryset(self):
-        products = Product.objects.filter(active=True)
+        products = Product.objects.filter(active=True)\
+                                    .select_related('category')
         category_slug = self.kwargs.get('category_slug')
         category_id = self.kwargs.get('category_id')
         if category_slug and category_id:
             self.category = get_object_or_404(Category,
                                          slug = category_slug,
                                          id = category_id)
-            products = products.filter(category = self.category)
+            products = products.filter(category = self.category).select_related('category')
         else:
             self.category = None
         return products
@@ -61,7 +63,8 @@ class ProductDetailView(DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        product = get_object_or_404(self.model, slug = self.kwargs.get('product_slug'),
+        product = Product.objects.select_related('category')
+        product = get_object_or_404(product, slug = self.kwargs.get('product_slug'),
                                     id = self.kwargs.get('product_id'))
         product_ids = product.category
         similar_product = self.model.objects.filter(category_id__in= [product_ids]).exclude(id = product.id)[:4]
