@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 from celery import shared_task
-import subprocess
+from django.core.management import call_command
 from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
 
@@ -19,10 +19,7 @@ def order_sender(order_id):
 @shared_task
 def dump_shop():
     try:
-        subprocess.run(
-            ['python','manage.py','dumpdata', 'shop','--indent=2','--output=shop/fixtures/shop_data.json'],
-            check = True
-        )
-        return f"Dumpdata was success instal!"
-    except subprocess.CalledProcessError as error:
+        call_command("dumpdata", "shop", "--indent=2", "--output=shop/fixtures/shop_data.json")
+        return f"Dumpdata was success install!"
+    except Exception  as error:
         return f"Error in dumpdata {error}"

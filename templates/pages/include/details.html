@@ -9,6 +9,8 @@
                 <h6 class="card-subtitle mb-2 text-body-secondary">{{ product.category}}</h6>
                 <p class="card-text card-text-detail">{{ product.description}}</p>
                 <div class='d-flex gap-5 justify-content-between flex-row-reverse'>
+                    <a href="{% url 'shop:product_update_url' product.id %}" class='btn btn-sm btn-warning'>Edit</a>
+                    <!-- Quantity form -->
                     {% include "pages/forms/quantity.html" with form=form product=product %}
                     {% if product.total_price < product.price %}
                         {% with discount=product.product_allowance.all%}

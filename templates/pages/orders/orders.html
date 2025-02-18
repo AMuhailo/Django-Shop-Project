@@ -10,6 +10,7 @@
             <div class="card mx-auto w-75 bg-light">
                 <div class="card-body">
                     <h4 class="border-bottom py-2">Checkout</h4>
+                    <!-- Order forms -->
                     {% include "pages/forms/orders.html" with form=form %}
                 </div>
             </div>
@@ -19,30 +20,8 @@
                 <div class="card-body">
                     <h5 class="card-title">Your orders:</h5>
                     <p class="card-text">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex justify-content-between">
-                                <span class='w-25 fw-bold   '>Product</span>
-                                <span class="fw-bold">Quantity</span>
-                                <span class="fw-bold">Price</span>
-                            </li>
-                            {% for item in cart %}
-                                <li class="list-group-item border-0 d-flex justify-content-between">
-                                    <span class='w-25'>{{ item.product }}</span>
-                                    <span >x{{ item.quantity }}</span>
-                                    <span class="fw-semibold">${{ item.total_price|floatformat:2}}</span>
-                                </li>
-                            {% endfor %}
-                            {% if cart.coupon %}
-                                <li class="list-group-item d-flex justify-content-between mt-3">
-                                    <span class='w-75 fw-bold'>{{ cart.coupon.code}} <span class='text-danger'>-{{cart.coupon.discount}}</span></span>
-                                    <span class="fw-bold">$-{{cart.get_coupon_discount|floatformat:2}}</span>
-                                </li>
-                            {% endif %}
-                            <li class="list-group-item d-flex justify-content-between mt-3">
-                                <span class='w-75 fw-bold'>Total</span>
-                                <span class="fw-bold">${{ cart.get_coupon_discount_total_price|floatformat:2}}</span>
-                            </li>
-                        </ul>
+                        <!-- About orders -->
+                        {% include "pages/orders/include/orderitems.html" with cart=cart%}
                     </p>
                 </div>
             </div>

@@ -1,0 +1,36 @@
+{% for item in cart%}
+    {% with product=item.product %}
+        <tr>
+            <th scope="row">
+                <img src="{{ product.image.url }}" class="img-thumbnail" alt="...">
+            </th>
+            <td>{{ product.title }}</td>
+            <td>
+                <form action="{% url 'cart:cart_remove' product.id%}" method="POST">
+                    {% csrf_token%}
+                    <button type='submit' class='btn btn-sm btn-danger'>Remove</button>
+                </form>
+            </td>
+            <td>
+                <form action="{% url 'cart:cart_add' product.id%}" method="POST">
+                    {% csrf_token%}
+                    {{ item.item_override.quantity}}
+                    {{ item.item_override.override}}
+                    <button type='submit' class='btn btn-sm btn-success'>Add</button>
+                </form>
+            </td>
+            {% if product.total_price < product.price %}
+                {% with discount=product.product_allowance.all%}
+                    {% for discount in discount %}
+                    <td class='d-flex justify-content-start gap-3'>${{ product.total_price }}</span><span class='text-danger'>-{{discount.discount}}%</span></td>
+                    {% endfor %}
+                {% endwith %}
+                    
+            {% else %}
+                <td>${{ product.total_price }}</td>
+            {% endif %}
+            
+            <td>${{ item.total_price }}</td>
+        </tr>
+    {% endwith %}
+{% endfor %}
