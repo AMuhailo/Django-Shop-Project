@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
 from celery import shared_task
+import subprocess
 from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
 
@@ -14,3 +15,14 @@ def order_sender(order_id):
     mail.attach_alternative(html_message,'text/html')
     mail.send()
     return f"Email sent to {order.email}"
+
+@shared_task
+def dump_shop():
+    try:
+        subprocess.run(
+            ['python','manage.py','dumpdata', 'shop','--indent=2','--output=shop/fixtures/shop_data.json'],
+            check = True
+        )
+        return f"Dumpdata was success instal!"
+    except subprocess.CalledProcessError as error:
+        return f"Error in dumpdata {error}"

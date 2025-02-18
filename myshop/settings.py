@@ -31,10 +31,10 @@ CART_SESSION_API = 'cart'
 # SECURITY WARNING: don't run with debug turned on in production!
 PRODUCTION_TEST = False
 
-if ENVIRONMENT  == 'production' or PRODUCTION_TEST == True:
-    DEBUG = False
-else:
-    DEBUG = True
+# if ENVIRONMENT  == 'production' or PRODUCTION_TEST == True:
+#     DEBUG = False
+# else:
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'shopfurnitures.up.railway.app']
 CSRF_TRUSTED_ORIGINS = ['https://shopfurnitures.up.railway.app']
@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
     'payment.apps.PaymentConfig',
     'coupons.apps.CouponsConfig',
+    'django_celery_results',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -173,7 +175,8 @@ if ENVIRONMENT  == 'production' or PRODUCTION_TEST == True:
 else:
     CELERY_BROKER_URL = env("REDIS_URL")
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
-
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_RESULT_EXTENDED = True
 #STRIPE SETTINGS
 STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY_TEST',default='secret_key')
 STRIPE_VERSION = '2022-08-01'
