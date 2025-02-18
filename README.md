@@ -1,9 +1,7 @@
-🛒 Django Shop
+__🛒 Django Shop__
 ![Django](https://img.shields.io/badge/Django-4.2-blue?style=for-the-badge) ![Python](https://img.shields.io/badge/Python-3.10-yellow?style=for-the-badge)
 ## Description project
-On this store website, I used CRUD capabilities. Product search via PostgreSQL using 
-``` django.contrib.postgres.search```. 
-Added similar products by category to the products.
+On this store website, I used CRUD capabilities. Product search via PostgreSQL using ``` django.contrib.postgres.search```. Added similar products by category to the products.
 Created a cart into which data is recorded using sessions and with their help shows the purchase.
 Order processing and sending the number to email are organized using Celery to reduce waiting time.
 Discounts and coupons have been added to the products. Each discount and coupon can be added in the admin panel. In addition, they will disappear if their validity period expires. Added payment via Stripe, which takes into account both discounts and coupons. The project itself was deployed on RailWay.
@@ -11,7 +9,7 @@ Discounts and coupons have been added to the products. Each discount and coupon 
 🚀 Deploy on Railway
 The project is deployed on Railway.
 To check the operation of the site, go to the link:
-🔗
+🔗https://shopfurnitures.up.railway.app/
 
 ## 🚀 Functional
 ✔️ Categories and products  
@@ -55,12 +53,17 @@ pip install -r requirements.txt
 4️⃣ Setting Environment Variables
 To run locally, you need to create an .env file in the root folder:
 ```bash
+ENVIRONMENT=development
 DEBUG=True
 SECRET_KEY=your-secret-key
-DATABASE_URL=postgres://user:password@localhost:5432/shopdb
-REDIS_URL=redis://localhost:6379/0
-CELERY_BROKER_URL=redis://localhost:6379/0
-ALLOWED_HOSTS=127.0.0.1,localhost
+DATABASE_URL=postgresql://postgres:AXeLLOVEXmumFmvnANIkEAwEsfPUQSZH@autorack.proxy.rlwy.net:18205/railway
+CLOUDINARY_URL=cloudinary://769593718786664:Px0Uwth8JONclxSNGJM9fZGbP9Q@dmzji9ijo
+REDIS_PUBLIC_URL=redis://default:MwVRdhmiDcLHtZUqzfMwZTJVdmcAstZu@monorail.proxy.rlwy.net:42048
+REDIS_URL=redis://default:MwVRdhmiDcLHtZUqzfMwZTJVdmcAstZu@redis.railway.internal:6379
+EMAIL_HOST_PASSWORD=your-password-app-gmail
+EMAIL_HOST_USER=your-email
+STRIPE_SECRET_KEY_TEST=your-stripe-secret-key
+STRIPE_WEBHOOK_SECRET=your-webhooks-secret-key
 ```
 ⚠️ Don't upload .env to GitHub!
 It needs to be added to .gitignore.
@@ -78,13 +81,6 @@ To allow Celery to run tasks in the background, start it like this:
 ```bash
 celery -A myshop worker --loglevel=info
 ```
-
-## 🚀 Deploy on Railway
-If your project is already deployed, you can add a command to update the code in README.md:
-```bash
-git push origin main
-```
-Railway will automatically update the site after a git push.
 
 ## 🔗 Useful commands
 💾 Creating a database backup
