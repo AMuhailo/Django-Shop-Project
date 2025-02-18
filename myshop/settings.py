@@ -57,7 +57,6 @@ INSTALLED_APPS = [
     'payment.apps.PaymentConfig',
     'coupons.apps.CouponsConfig',
     'django_celery_beat',
-    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
@@ -73,9 +72,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'myshop.urls'
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
