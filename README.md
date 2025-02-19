@@ -1,7 +1,8 @@
 ## __🛒 Django Shop__
 ![Django](https://img.shields.io/badge/Django-4.2-blue?style=for-the-badge) ![Python](https://img.shields.io/badge/Python-3.10-yellow?style=for-the-badge)
 ## Description project
-On this store website, I used CRUD capabilities. Product search via PostgreSQL using ``` django.contrib.postgres.search```. Added similar products by category to the products.
+On this store website, I used CRUD capabilities. Product search via PostgreSQL using
+``` django.contrib.postgres.search```. Added similar products by category to the products.
 Created a cart into which data is recorded using sessions and with their help shows the purchase.
 Order processing and sending the number to email are organized using Celery to reduce waiting time.
 Discounts and coupons have been added to the products. Each discount and coupon can be added in the admin panel. In addition, they will disappear if their validity period expires. Added payment via Stripe, which takes into account both discounts and coupons. The project itself was deployed on RailWay.
@@ -19,7 +20,7 @@ To check the operation of the site, go to the link:
 ✔️ Placing an order
 ✔️ Sending a message to email
 ✔️ Coupons and discounts
-✔️ Payment via stripe
+✔️ Payment with stripe
 ✔️ Webhook
 
 ## 🛠️ Технології
