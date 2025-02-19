@@ -1,4 +1,5 @@
 from decimal import Decimal
+from hashlib import blake2b
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from coupons.models import Coupon
@@ -22,8 +23,8 @@ class Order(models.Model):
     paid = models.BooleanField(default = False)
     
     #Coupons discount
-    coupon = models.ForeignKey(Coupon, on_delete=models.CASCADE, related_name='order_coupon')
-    discount = models.IntegerField(validators = [MinValueValidator(0), MaxValueValidator(100)])
+    coupon = models.ForeignKey(Coupon, on_delete=models.CASCADE, related_name='order_coupon', blank=True, null = True)
+    discount = models.IntegerField(validators = [MinValueValidator(0), MaxValueValidator(100)],default=0)
     
     class Meta:
         ordering = ['-created']

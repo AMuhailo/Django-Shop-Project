@@ -2,7 +2,7 @@
     <div class="card-body">
       <h5 class="card-title">Thank you for your order,{{order.last_name}} {{order.first_name}}</h5>
       <h6 class="card-subtitle mb-2 text-body-secondary">Order №{{order.id}}</h6>
-      <p class="card-text">Total price: {{get_total_money}}</p>
+      <p class="card-text">Total price: {{order.get_total_money}}</p>
         {% if order.coupon %}
         <p class="card-text">Coupon: <b class="text-success">{{order.coupon}}</b></p>
         <p class="card-text">Discount: <i class="text-danger">-{{order.discount}}%</i></p>
