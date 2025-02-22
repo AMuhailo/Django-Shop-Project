@@ -13,15 +13,7 @@ To check the operation of the site, go to the link:
 🔗https://shopfurnitures.up.railway.app/
 
 ## 🚀 Functional
-✔️ Categories and products  
-✔️ CRUD on products  
-✔️ Product search  
-✔️ Throwing goods into the basket
-✔️ Placing an order
-✔️ Sending a message to email
-✔️ Coupons and discounts
-✔️ Payment with stripe
-✔️ Webhook
+✔️ Categories and products  ✔️ CRUD on products  ✔️ Product search  ✔️ Throwing goods into the basket ✔️ Placing an order ✔️ Sending a message to email ✔️ Coupons and discounts ✔️ Payment with stripe ✔️ Webhook
 
 ## 🛠️ Технології
 - **Django**
