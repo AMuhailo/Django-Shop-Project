@@ -1,5 +1,5 @@
 ## __🛒 Django Shop__
-![Django](https://img.shields.io/badge/Django-4.2-blue?style=for-the-badge) ![Python](https://img.shields.io/badge/Python-3.10-yellow?style=for-the-badge)
+![Django](https://img.shields.io/badge/Django-4.2-darkgreen?style=for-the-badge) ![Python](https://img.shields.io/badge/Python-3.12.9-blue?style=for-the-badge)
 ## Description project
 On this store website, I used CRUD capabilities. Product search via PostgreSQL using
 ``` django.contrib.postgres.search```. Added similar products by category to the products.
@@ -13,17 +13,9 @@ To check the operation of the site, go to the link:
 🔗https://shopfurnitures.up.railway.app/
 
 ## 🚀 Functional
-✔️ Categories and products  
-✔️ CRUD on products  
-✔️ Product search  
-✔️ Throwing goods into the basket
-✔️ Placing an order
-✔️ Sending a message to email
-✔️ Coupons and discounts
-✔️ Payment with stripe
-✔️ Webhook
+✔️ Categories and products  ✔️ CRUD on products  ✔️ Product search  ✔️ Throwing goods into the basket ✔️ Placing an order ✔️ Sending a message to email ✔️ Coupons and discounts ✔️ Payment with stripe ✔️ Webhook
 
-## 🛠️ Технології
+## 🛠️ Technologies
 - **Django**
 - **PostgreSQL**
 - **Celery + Redis**
@@ -57,10 +49,9 @@ To run locally, you need to create an .env file in the root folder:
 ENVIRONMENT=development
 DEBUG=True
 SECRET_KEY=your-secret-key
-DATABASE_URL=postgresql://postgres:AXeLLOVEXmumFmvnANIkEAwEsfPUQSZH@autorack.proxy.rlwy.net:18205/railway
+DATABASE_URL=postgres://user:password@localhost:5432/railway
 CLOUDINARY_URL=cloudinary://769593718786664:Px0Uwth8JONclxSNGJM9fZGbP9Q@dmzji9ijo
-REDIS_PUBLIC_URL=redis://default:MwVRdhmiDcLHtZUqzfMwZTJVdmcAstZu@monorail.proxy.rlwy.net:42048
-REDIS_URL=redis://default:MwVRdhmiDcLHtZUqzfMwZTJVdmcAstZu@redis.railway.internal:6379
+REDIS_URL=redis://localhost:6379/0
 EMAIL_HOST_PASSWORD=your-password-app-gmail
 EMAIL_HOST_USER=your-email
 STRIPE_SECRET_KEY_TEST=your-stripe-secret-key
@@ -93,3 +84,8 @@ python manage.py dumpdata --indent=2 --output=shop/fixtures/db_backup.json
 ```bash
 python manage.py loaddata db_backup.json
 ```
+
+## 📩 Contacts
+If you have any questions, suggestions, problems with the project, ideas or proposals - please contact
+📧 Email: amuhailo25@gmail.com
+👨‍💻 GitHub: AMuhailo
