@@ -5,15 +5,20 @@
 
 {% block content %}
 <div class="row gap-5 mx-2 my-5">
-    <div class="col-6 col-md-1">
+    <div class="col-6 col-md-2">
         <!-- Categories code -->
-        {% categories_list category.slug category.id %}
         <form action="{% url 'shop:search_url'%}">
-            {{search_form.as_p}}
-            <button class='btn btn-sm btn-primary'>Search</button>
+            {% for field in search_form %}
+            <div class="input-group mb-3">
+                <button class="btn stn-sm btn-outline-primary" type="submit" id="button-addon1">Search</button>
+                {{ field }}
+            </div>
+            {% endfor %}
         </form>
+        {% categories_list category.slug category.id %}
+        
     </div>
-    <div class="col-sm-6 col-md-10">
+    <div class="col-sm-6 col-md-9">
         <h4 class='mx-3'>{% if query %}{{ query }}{% endif %} Products</h4>
         {% if query %}
         <div class="container-fluid w-100">

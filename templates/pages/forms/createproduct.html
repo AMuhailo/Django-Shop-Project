@@ -3,6 +3,8 @@
 {% block title %} Create Product {% endblock title %}
 
 {% block content %}
+<div class='mx-auto w-25'>
+    <h3 class='border-bottom'>Add a new products</h3>
     <form method="POST" enctype='multipart/form-data'>
         <div class="mb-3">
            {% csrf_token %}
@@ -10,4 +12,5 @@
            <button type='submit' class='btn btn-sm btn-success'>Create</button>
         </div>
     </form>
+</div>
 {% endblock content %}
