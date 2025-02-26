@@ -84,3 +84,8 @@ python manage.py dumpdata --indent=2 --output=shop/fixtures/db_backup.json
 ```bash
 python manage.py loaddata db_backup.json
 ```
+
+## 📩 Contacts
+If you have any questions, suggestions, problems with the project, ideas or proposals - please contact
+📧 Email: amuhailo25@gmail.com
+👨‍💻 GitHub: AMuhailo
