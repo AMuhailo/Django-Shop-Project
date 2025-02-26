@@ -15,7 +15,7 @@ To check the operation of the site, go to the link:
 ## 🚀 Functional
 ✔️ Categories and products  ✔️ CRUD on products  ✔️ Product search  ✔️ Throwing goods into the basket ✔️ Placing an order ✔️ Sending a message to email ✔️ Coupons and discounts ✔️ Payment with stripe ✔️ Webhook
 
-## 🛠️ Технології
+## 🛠️ Technologies
 - **Django**
 - **PostgreSQL**
 - **Celery + Redis**
@@ -49,10 +49,9 @@ To run locally, you need to create an .env file in the root folder:
 ENVIRONMENT=development
 DEBUG=True
 SECRET_KEY=your-secret-key
-DATABASE_URL=postgresql://postgres:AXeLLOVEXmumFmvnANIkEAwEsfPUQSZH@autorack.proxy.rlwy.net:18205/railway
+DATABASE_URL=postgres://user:password@localhost:5432/railway
 CLOUDINARY_URL=cloudinary://769593718786664:Px0Uwth8JONclxSNGJM9fZGbP9Q@dmzji9ijo
-REDIS_PUBLIC_URL=redis://default:MwVRdhmiDcLHtZUqzfMwZTJVdmcAstZu@monorail.proxy.rlwy.net:42048
-REDIS_URL=redis://default:MwVRdhmiDcLHtZUqzfMwZTJVdmcAstZu@redis.railway.internal:6379
+REDIS_URL=redis://localhost:6379/0
 EMAIL_HOST_PASSWORD=your-password-app-gmail
 EMAIL_HOST_USER=your-email
 STRIPE_SECRET_KEY_TEST=your-stripe-secret-key
