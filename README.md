@@ -1,5 +1,5 @@
 ## __🛒 Django Shop__
-![Django](https://img.shields.io/badge/Django-4.2-blue?style=for-the-badge) ![Python](https://img.shields.io/badge/Python-3.10-yellow?style=for-the-badge)
+![Django](https://img.shields.io/badge/Django-4.2-darkgreen?style=for-the-badge) ![Python](https://img.shields.io/badge/Python-3.12.9-blue?style=for-the-badge)
 ## Description project
 On this store website, I used CRUD capabilities. Product search via PostgreSQL using
 ``` django.contrib.postgres.search```. Added similar products by category to the products.
